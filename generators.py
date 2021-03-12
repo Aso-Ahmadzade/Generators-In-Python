@@ -146,6 +146,57 @@ print(next(h))
 print("*******************************")
 
 
+"""
+
+The true power of generators:
+
+I have two functions here. The long_time funtion that uses a range and another long_time2 funtion that uses a range (A generator) and then converts it into a list. So second one creates a list and then form that list that's created in memory on our computers, it's going to go one by one and multiply thing by 5 versus first one that is a range which is a generator that comes built into Python that is going to one by one hold 0 in memory and multiply it by 5, hold 1 in memory and multiply it by 5 and keeps going, keeps going and removes from memory any old numbers.
+
+What is the performance of this two functions?
+
+long_time()     ->    took 12.906043529510498 s
+long_time2()    ->    took 18.10884141921997 s
+
+So the generators have better performance and is so much faster.
+
+So with generators we're able to not hold things in memory, not have to consume all that resources and instead process data efficiently.
+
+Generators are really really useful when calculating large sets of data. Particulary if we're using long loops where we don't really want to store that memory and we don't need to calculate everything at the same time.
+
+"""
+
+
+def performance(fn):
+    def wrapper(*args, **kwargs):
+        t1 = time()
+        result = fn(*args, **kwargs)
+        t2 = time()
+        print(f"took {t2 - t1} s")
+        return result
+    return wrapper
+
+
+@performance
+def long_time():
+    print('using range:')
+    for i in range(100000000):
+        i * 5
+
+
+@performance
+def long_time2():
+    print('using list:')
+    for i in list(range(100000000)):
+        i * 5
+
+
+long_time()
+long_time2()
+
+
+print("*******************************")
+
+
 def fib(number):
     a, b = 0, 1
     for i in range(number):
