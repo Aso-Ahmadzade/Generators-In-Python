@@ -197,6 +197,82 @@ long_time2()
 print("*******************************")
 
 
+"""
+
+Implementing our own *for loop* and our own *range function*:
+
+1) for loop:
+All it's doing is receiving an iterable and then we're going to say iterator is going to equal an iterable. Now for us to have an iterable, we should use iter function and convert it to an iterable. This iter function is going to allow us to use next funtion on this iterable. Now we use a while loop and inside of it we use a try block. Now inside our try block, we say until everything is fine, at first print our iterator and then with the next function we'll go to our next value in our iterable that we passed to this function. And then finally we say that, we want to stop, when we have the StopIteration exception. So inside this exception we use break statement. So now if we call special_for and then give it a list, and then click run, we'll see that we loop through some iterable objects using next function. And we see that this object exists in the same memory space (Something like this: <list_iterator object at 0x00000194575BA0D0>) even though we're constantly looping through it.
+
+So this is how for loops work. When we do this (for num in [1, 2, 3]), it's going to turn it into an iterable and it's going to keep runnig and keep calling next function on it over and over until we finish the end of line and then break out of the loop. 
+
+We also can check the actual values of the iterator with printing our next function. We also can something like this here (Line 240) and multiply our iterator by 2. So now our special for loop, jsut multiplied our list by 2.
+
+
+"""
+
+
+def special_for(iterable):
+    iterator = iter(iterable)
+    while True:
+        try:
+            print(iterator)
+            next(iterator)
+        except StopIteration:
+            break
+
+
+def special_for1(iterable):
+    iterator = iter(iterable)
+    while True:
+        try:
+            print(iterator)
+            print(next(iterator))
+        except StopIteration:
+            break
+
+
+def special_for2(iterable):
+    iterator = iter(iterable)
+    while True:
+        try:
+            print(iterator)
+            print(next(iterator) * 2)
+        except StopIteration:
+            break
+
+
+special_for([1, 2, 3])
+special_for1([1, 2, 3])
+special_for2([1, 2, 3])
+
+
+class MyGen():
+    current = 0
+
+    def __init__(self, first, last):
+        self.first = first
+        self.last = last
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if MyGen.current < self.last:
+            num = MyGen.current
+            MyGen.current += 1
+            return num
+        raise StopIteration
+
+
+gen = MyGen(0, 100)
+for i in gen:
+    print(i)
+
+
+print("*******************************")
+
+
 def fib(number):
     a, b = 0, 1
     for i in range(number):
