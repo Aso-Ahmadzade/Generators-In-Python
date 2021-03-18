@@ -206,8 +206,18 @@ All it's doing is receiving an iterable and then we're going to say iterator is 
 
 So this is how for loops work. When we do this (for num in [1, 2, 3]), it's going to turn it into an iterable and it's going to keep runnig and keep calling next function on it over and over until we finish the end of line and then break out of the loop. 
 
-We also can check the actual values of the iterator with printing our next function. We also can something like this here (Line 240) and multiply our iterator by 2. So now our special for loop, jsut multiplied our list by 2.
+We also can check the actual values of the iterator with printing our next function. We also can something like this here (Line 250) and multiply our iterator by 2. So now our special for loop, jsut multiplied our list by 2.
 
+
+2) range function:
+
+Let's create a class. And this class is going to mimic what range function does. So this class will have an init function (Line 263). And inside of it, we have first and last. In range we could say like range(2, 15) and 2 was our start and 15 was our end. So here first is our start and last is our end. Note that we use class here, because we're just creating our own data type, our own special range in Python. 
+
+Now we can use our Dunder methods. So remember how we have the iter() to get an iterator and use next on them, well we have Dunder method that is __iter__ and this __iter__ allows us to create an iterable. 
+
+And finally we want to be able to run next function on our gen (Line 278). So once again we can use a Dunder method which is called __next__ and this is built into Python. Now all we want to do here is to let it know how we want next to work. We need some sort of state or data to keep track of where we are. Well, we can create a class object attribute (Line 261). So we can say current equals to zero. So this is where we are currently on our iteration and now we can say if our current as long as is less than our last, we want a num to equals our current and we want to increase this current by 1, and then return num. So if our current get bigger than last, we simply going to raise a StopIteration. Because there's no more things to iterate over. 
+
+Note that the for loop automatically catches this StopIteration, so it doesn't error out and it's stops looping. So That's how things work with range. 
 
 """
 
