@@ -41,7 +41,7 @@ print(my_list)
 
 li = make_list(100000)
 
-print(li)
+# print(li)
 
 
 print("*******************************")
